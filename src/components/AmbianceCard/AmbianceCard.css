@@ -11,7 +11,8 @@
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 209, 193, 0.3);
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; 
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    cursor: pointer;
   }
 
   @keyframes blinking-border {
@@ -30,6 +31,11 @@
   .ambiance-card:hover {
     transform: scale(1.05); 
     box-shadow: 0 8px 60px rgba(0, 0, 0, 0.2);
+  }
+
+  .ambiance-card:focus-visible {
+    outline: 3px solid rgba(61, 60, 66, 0.45);
+    outline-offset: 3px;
   }
   
   .ambiance-image {

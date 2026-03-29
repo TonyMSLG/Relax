@@ -1,0 +1,14 @@
+.animated-background {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: -1;
+  background: #1b2021;
+  pointer-events: none;
+}
+
+.animated-background canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}

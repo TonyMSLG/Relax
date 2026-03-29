@@ -12,6 +12,9 @@
     background: none;
     border: none;
     cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   }
 
   .play-pause-btn svg {
@@ -23,4 +26,8 @@
     width: 100px;
     height: 10px;
     cursor: pointer;
+}
+
+.audio-player-slider {
+  min-width: 110px;
 }
