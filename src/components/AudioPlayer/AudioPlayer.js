@@ -38,7 +38,7 @@ const AudioPlayer = ({ audioUrl, settings, masterVolume }) => {
     audioRefs.current = [createAudioInstance(audioUrl), createAudioInstance(audioUrl)];
   }
 
-  const getNormalizedVolume = useCallback(() => volume / 100, [volume]);
+  const getNormalizedVolume = useCallback(() => volumeRef.current / 100, []);
 
   const getMasterVolumeFactor = useCallback(() => masterVolume / 100, [masterVolume]);
 
@@ -280,12 +280,30 @@ const AudioPlayer = ({ audioUrl, settings, masterVolume }) => {
       playAudio();
     };
 
+    const handlePresetLoad = (event) => {
+      const { sounds } = event.detail;
+      if (audioUrl in sounds) {
+        const newVolume = sounds[audioUrl];
+        volumeRef.current = newVolume;
+        setVolume(newVolume);
+        if (!isPlayingRef.current) {
+          playAudio();
+        }
+      } else {
+        if (isPlayingRef.current) {
+          pauseAudio(false);
+        }
+      }
+    };
+
     window.addEventListener('globalAudioControl', handleGlobalAudioControl);
     window.addEventListener('audioCardToggle', handleCardToggle);
+    window.addEventListener('presetLoad', handlePresetLoad);
 
     return () => {
       window.removeEventListener('globalAudioControl', handleGlobalAudioControl);
       window.removeEventListener('audioCardToggle', handleCardToggle);
+      window.removeEventListener('presetLoad', handlePresetLoad);
     };
   }, [audioUrl, pauseAudio, playAudio]);
 
